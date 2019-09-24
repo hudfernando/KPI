@@ -1,0 +1,5 @@
+🚚 🚚 Transporte/Expedição
+Tot Vol Expedidos   => 4000
+Tot Notas Faturadas => 4000
+Venda               => R$ 4000
+

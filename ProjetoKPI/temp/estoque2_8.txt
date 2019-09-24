@@ -1,0 +1,5 @@
+ÁREA: ESTOQUE
+Total Produtos Zerados => 2000
+Nível de Rupturas      => 2000
+Perdas do Mês          => 2000
+

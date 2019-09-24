@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link href="/css/grafico.css" rel="stylesheet" type="text/css" /> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<style>
+    .container {
+        width: 50%;
+        height: 50%;
+    }
+</style>
+
+<body>
+    <section class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="text-center">Informações Consolidadas</h4>
+        </div>
+        <div id="conteudo-left" class="panel-body">
+
+            <table id="info" class="table table-bordered" width="50%" border="1px" cellpadding="5px" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Total Produtos Zerados</th>
+                        <th>Nivel de Rupturas</th>
+                        <th>Perdas Setembro</th>
+
+                    </tr>
+                </thead>
+                <tbody id="info">
+                    <tr>
+                        <% estoque.forEach(function(estoque){ %>
+                    <tr>
+                        <td align="center"><%= estoque.DATA_INSERCAO.substring(0, 10) %></td>
+                        <td align="center"><%= estoque.TOTAL_DE_PRODUTOS_ZERADOS%></td>
+                        <td align="center"><%= estoque.NIVEL_DE_RUPTURAS%></td>
+                        <td align="center"><%= estoque.PERDAS_DO_MES %></td>
+
+                    </tr>
+                    <% })%>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <div id="conteudo-rigth" class="container">
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script>
+        var inf = document.getElementById("info").innerText.split('\n');
+        var listaDeData = [];
+        var listaDeRupturas = [];
+        for (let index = 2; index < inf.length; index++) {
+            let element = inf[index].split('\t');
+            listaDeData.push(element[0]);
+            listaDeRupturas.push(element[2]);
+            
+            
+        }
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: listaDeData,
+                datasets: [
+                    {
+                        label: "Rupturas",
+                        data: listaDeRupturas,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        //fill: false
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                        }
+                    }]
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>

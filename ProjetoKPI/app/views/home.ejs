@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href="/css/style.css" rel="stylesheet" type="text/css" />
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>KPIs</title>
+</head>
+
+<body>
+
+      <form action="/informacoes_mensais" method="get">
+            <% if (areas.indexOf(0) != -1) { %>
+            <button disabled>Informacoes Mensais - Abdias</button>
+            <% } 
+          else{ %>
+            <button>Informacoes Mensais - Abdias</button>
+            <%}
+          %>
+      </form>
+
+      <form action="/producao" method="get">
+            <% if (areas.indexOf(1) != -1) { %>
+            <button disabled>Producao - Abdias</button>
+            <% } 
+          else{ %>
+            <button>Producao - Abdias</button>
+            <%}
+          %>
+      </form>
+
+      <form action="/estoque" method="get">
+            <% if (areas.indexOf(2) != -1) { %>
+            <button disabled>Estoque - Abdias</button>
+            <% } 
+          else{ %>
+            <button>Estoque - Abdias</button>
+            <%}
+          %>
+      </form>
+
+      <form action="/rms" method="get">
+            <% if (areas.indexOf(3) != -1) { %>
+            <button disabled>Recebimento de Mercadoria - Leonardo</button>
+            <% } 
+          else{ %>
+            <button>Recebimento de Mercadoria - Leonardo</button>
+            <%}
+          %>
+      </form>
+
+      <form action="/expedicao" method="get">
+            <% if (areas.indexOf(4) != -1) { %>
+            <button disabled>Expedição - Eliezer</button>
+            <% } 
+          else{ %>
+            <button>Expedição - Eliezer</button>
+            <%}
+          %>
+      </form>
+
+      <form action="/envio" method="get">
+            <% if (areas.length != 5) { %>
+            <button disabled>Enviar</button>
+            <% } 
+          else{ %>
+            <button>Enviar</button>
+            <%}
+          %>
+      </form>
+
+      <form action="/consulta" method="get">
+            <button>Consolidado estoque</button>
+      </form>
+
+      <form action="/agendamento" method="get">
+        <button>Agendamento De Entrega</button>
+  </form>
+</body>
+
+</html>

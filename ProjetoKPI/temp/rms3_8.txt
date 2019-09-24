@@ -1,0 +1,4 @@
+ÁREA: RMS
+Rec de Cargas           => 4000
+Tot de Notas Efetivadas => 4000
+

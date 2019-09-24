@@ -1,0 +1,9 @@
+Informações do dia: 3 de agosto
+ÁREA: PRODUÇÃO
+Total de Pedidos  => 8000
+Linhas por Pedido => 8000
+Media Linhas Ped  => 8000
+Farol Desempenho  => 8000
+Total de Unidades => 8000
+Final Producao    => 8000
+

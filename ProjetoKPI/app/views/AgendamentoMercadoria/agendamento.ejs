@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+
+<body>
+
+    <style>
+        .pequeno {
+            height: 1%;
+        }
+    </style>
+
+    <form class="col py-3 px-md-5 border bg-light" action="/agendar" method="post">
+        <div>
+            <p class="font-weight-bold">Informações da Mercadoria:</p>
+        </div>
+        <div class="form-row" id="info_merc">
+
+            <div class="form-group col-md-4">
+                <label for="Fornecedor">Fornecedor:</label>
+                <select id="inputFornecedor" class="form-control" name="FORNECEDOR">
+                    <% fornecedor.forEach(function(fornecedor){ %>
+                    <option><%= fornecedor.FORNECEDOR_NOME%></option>
+                    <% })%>
+                </select>
+            </div>
+
+            <div class="form-group col-md-2">
+                <label for="NFs">NF's</label>
+                <input type="text" class="form-control" id="NFs" name="NOTAS_FISCAIS">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="PedidoGoyaz">Pedido Goyaz</label>
+                <input type="text" class="form-control" id="PedidoGoyaz" name="PEDIDO_GOYAZ">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="Volumes">Volumes:</label>
+                <input type="text" class="form-control" id="Volumes" name="VOLUMES">
+            </div>
+
+            <button type="button" id="addInput" class="btn btn-light pequeno"><img
+                    src="images/imagem_adicionar.png"></button>
+
+        </div>
+        <div class="form-row" id="dynamicDiv"></div>
+
+        <div>
+            <p class="font-weight-bold">Informações da Transportadora:</p>
+        </div>
+
+        <div class="form-row">
+
+            <div class="form-group col-md-4">
+                <label for="Transportadora">Transportadora:</label>
+                <select id="inputTransportadora" class="form-control" name="TRANSPORTADORA">
+                    <% transportadora.forEach(function(transportadora){ %>
+                    <option><%= transportadora.TRANSPORTADORA_NOME%></option>
+                    <% })%>
+                </select>
+            </div>
+
+            <div class="form-group col-md-2">
+                <label for="TelefoneContato">Telefone Contato</label>
+                <input type="text" class="form-control" id="TelefoneContato" name="TELEFONE_CONTATO">
+            </div>
+
+            <div class="form-group col-md-2">
+                <label for="inputResponsavelAgenda">Responsável Agenda</label>
+                <input type="text" class="form-control" id="inputResponsavelAgenda" name="RESPONSAVEL_AGENDA">
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="inputEmail">E-mail</label>
+                <input type="email" class="form-control" id="inputEmail" name="EMAIL">
+
+            </div>
+
+        </div>
+
+        <div>
+            <p class="font-weight-bold">Selecionar a Data:</p>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="inputDia">Dia</label>
+                <input type="Date" class="form-control" id="inputDia" name="DIA">
+            </div>
+
+            <div class="form-group col-md-2">
+                <label for="inputHora">Hora Começo</label>
+                <input type="time" class="form-control" id="inputHora" name="HORARIO_COMECO">
+            </div>
+
+            <div class="form-group col-md-2">
+                <label for="inputHora">Hora Termino</label>
+                <input type="time" class="form-control" id="inputHora" name="HORARIO_FIM">
+            </div>
+
+
+        </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Gerar Agendamento</button>
+    </form>
+
+    <script>
+        $(function () {
+            var scntDiv = $('#dynamicDiv');
+            $(document).on('click', '#addInput', function () {
+                for (var i = 0; i < 1; i++) {
+                    $('<div class="form-row">' +
+                        '<div class="form-group col-md-4"> <label for="Fornecedor">Fornecedor:</label> <select id="inputFornecedor" class="form-control" name="FORNECEDOR"> <% fornecedor.forEach(function(fornecedor){ %> <option><%= fornecedor.FORNECEDOR_NOME%></option> <% })%> </select> </div>' +
+                        '<div class="form-group col-md-2"> <label for="NFs">NFs </label> <input type="text" class="form-control" name="NOTAS_FISCAIS" id="NFs"> </div>' +
+                        '<div class="form-group col-md-2"> <label for="PedidoGoyaz">Pedido Goyaz</label> <input type="text" class="form-control" id="PedidoGoyaz" name="PEDIDO_GOYAZ"> </div>' +
+                        '<div class="form-group col-md-2"> <label for="Volumes">Volumes:</label> <input type="text" class="form-control" id="Volumes" name="VOLUMES"> </div>' +
+
+                        '</div>').appendTo(scntDiv);
+                }
+                return false;
+            });
+            $(document).on('click', '#remInput', function () {
+                $(this).parents('p').remove();
+                return false;
+            });
+        });
+    </script>
+
+</body>
+
+</html>
