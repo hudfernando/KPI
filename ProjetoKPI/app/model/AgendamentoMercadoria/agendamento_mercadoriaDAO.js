@@ -52,13 +52,21 @@ agendamento_mercadoriaDAO.prototype.insiraHorarioAgendamento = function (agendam
 agendamento_mercadoriaDAO.prototype.insiraInformacoesMercadoria = function (agendamento_mercadoria, idFornecedor, idAgendamento) {
     let sql = 'INSERT INTO INFORMACOES_MERCADORIA(NOTAS_FISCAIS, PEDIDO_GOYAZ, VOLUMES, FK_ID_FORNECEDOR, FK_ID_AGENDAMENTO)';
     let valores = 'VALUES (';
-    valores += agendamento_mercadoria.NOTAS_FISCAIS + ',';
-    valores += agendamento_mercadoria.PEDIDO_GOYAZ + ',';
+    valores += "'" + agendamento_mercadoria.NOTAS_FISCAIS+ "'" + ',';
+    valores += "'" +agendamento_mercadoria.PEDIDO_GOYAZ+ "'" + ',';
     valores += agendamento_mercadoria.VOLUMES + ',';
     valores += idFornecedor + ',';
     valores += idAgendamento + ')';
 
     sql += valores;
+    this._connection.query(sql);
+}
+
+agendamento_mercadoriaDAO.prototype.insiraInformacoesDaTransportadora = function (agendamento_mercadoria, codTrans) {
+    let sql = 'UPDATE TRANSPORTADORA SET TRANSPORTADORA_TELEFONE = '+ "'" +agendamento_mercadoria.TELEFONE_CONTATO + "'" + ','
+    sql +=    'TRANSPORTADORA_RESP_AGEND = ' + "'" + agendamento_mercadoria.RESPONSAVEL_AGENDA + "'"  + ','
+    sql +=   'TRANSPORTADORA_EMAIL = ' + "'" +  agendamento_mercadoria.EMAIL + "'" ;
+    sql +=   'WHERE ID_TRANSPORTADORA = ' + codTrans;
     this._connection.query(sql);
 }
 
@@ -73,6 +81,11 @@ agendamento_mercadoriaDAO.prototype.retorneoOUltimoAgendamentoSalvo = function (
     return idAgendamento[0].ID_AGENDAMENTO;
 }
 
+agendamento_mercadoriaDAO.prototype.retorneOsAgendamentosCriados = function()
+{
+    let agendamentos = this._connection.query('SELECT * FROM RETORNE_OS_AGENDAMENTOS');
+    return agendamentos;
+}
 
 module.exports = function () {
     return agendamento_mercadoriaDAO;

@@ -114,6 +114,47 @@
         <button type="submit" class="btn btn-primary">Gerar Agendamento</button>
     </form>
 
+    <form >
+        <div id="conteudo-left" class="panel-body">
+
+            <table id="info" class="table table-bordered" width="50%" border="1px" cellpadding="5px" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Notas Fiscais</th>
+                        <th>Pedido Goyaz</th>
+                        <th>Volumes</th>
+                        <th>Fornecedor</th>
+                        <th>Dia Agendado</th>
+                        <th>Hora Inicio</th>
+                        <th>Hora Fim</th>
+                        <th>Identificação agendamento</th>
+
+                    </tr>
+                </thead>
+                <tbody id="info">
+                    <tr>
+                        <% agendamento.forEach(function(agendamento){ %>
+                    <tr>
+                        <td align="center"><%= agendamento.NOTAS_FISCAIS %></td>
+                        <td align="center"><%= agendamento.PEDIDO_GOYAZ%></td>
+                        <td align="center"><%= agendamento.VOLUMES%></td>
+                        <td align="center"><%= agendamento.FORNECEDOR_NOME %></td>
+                        <td align="center"><%= agendamento.DIA_AGENDAMENTO %></td>
+                        <td align="center"><%= agendamento.HORARIO_INICIO %></td>
+                        <td align="center"><%= agendamento.HORARIO_FIM %></td>
+                        <td align="center"><%= agendamento.ID_AGENDAMENTO %></td>
+
+                    </tr>
+                    <% })%>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </form>
+
+
     <script>
         $(function () {
             var scntDiv = $('#dynamicDiv');
