@@ -50,10 +50,9 @@ agendamento_mercadoriaDAO.prototype.insiraHorarioAgendamento = function (agendam
 }
 
 agendamento_mercadoriaDAO.prototype.insiraInformacoesMercadoria = function (agendamento_mercadoria, idFornecedor, idAgendamento) {
-    let sql = 'INSERT INTO INFORMACOES_MERCADORIA(NOTAS_FISCAIS, PEDIDO_GOYAZ, VOLUMES, FK_ID_FORNECEDOR, FK_ID_AGENDAMENTO)';
+    let sql = 'INSERT INTO INFORMACOES_MERCADORIA(NOTAS_FISCAIS, VOLUMES, FK_ID_FORNECEDOR, FK_ID_AGENDAMENTO)';
     let valores = 'VALUES (';
     valores += "'" + agendamento_mercadoria.NOTAS_FISCAIS+ "'" + ',';
-    valores += "'" +agendamento_mercadoria.PEDIDO_GOYAZ+ "'" + ',';
     valores += agendamento_mercadoria.VOLUMES + ',';
     valores += idFornecedor + ',';
     valores += idAgendamento + ')';

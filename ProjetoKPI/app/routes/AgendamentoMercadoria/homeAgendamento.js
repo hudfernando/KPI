@@ -10,4 +10,8 @@ module.exports = function (application) {
     application.get('/gerar_agendamento', function (req, res) {
         application.app.controllers.AgendamentoMercadoria.agendamento_mercadoria.agendamento_mercadoria_carregar_informacoes(application, req, res);
     });
+
+    application.get('/consultar_agendamento', function (req, res) {
+        application.app.controllers.AgendamentoMercadoria.visualiza_agendamento.selecionar_agendamentos(application, req, res);
+    });
 }
