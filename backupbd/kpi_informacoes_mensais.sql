@@ -30,7 +30,7 @@ CREATE TABLE `informacoes_mensais` (
   `DATA_INSERCAO` varchar(7) NOT NULL,
   PRIMARY KEY (`ID_INFORMACOES_MENSAIS`),
   UNIQUE KEY `DATA_INSERCAO_UNIQUE` (`DATA_INSERCAO`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `informacoes_mensais` (
 
 LOCK TABLES `informacoes_mensais` WRITE;
 /*!40000 ALTER TABLE `informacoes_mensais` DISABLE KEYS */;
-INSERT INTO `informacoes_mensais` VALUES (10,4754,'2019-08'),(11,4715,'2019-09');
+INSERT INTO `informacoes_mensais` VALUES (10,4754,'2019-08'),(11,4715,'2019-09'),(12,4710,'2019-10');
 /*!40000 ALTER TABLE `informacoes_mensais` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-24 14:26:30
+-- Dump completed on 2019-10-07 15:28:38
