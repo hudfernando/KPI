@@ -110,12 +110,13 @@
         <button type="submit" class="btn btn-primary">Gerar Agendamento</button>
     </form>
 
-    <form >
+    <form>
         <div id="conteudo-left" class="panel-body">
 
             <table id="info" class="table table-bordered" width="50%" border="1px" cellpadding="5px" cellspacing="0">
                 <thead>
                     <tr>
+                        <th>Protocolo</th>
                         <th>Notas Fiscais</th>
                         <th>Volumes</th>
                         <th>Fornecedor</th>
@@ -124,28 +125,22 @@
                         <th>Dia Agendado</th>
                         <th>Hora Inicio</th>
                         <th>Hora Fim</th>
-                        <th>Identificação agendamento</th>
+                        <th>Status</th>
+
 
                     </tr>
                 </thead>
                 <tbody id="info">
-                    <tr>
-                        <% agendamento.forEach(function(agendamento){ %>
-                    <tr>
-                        <td align="center"><%= agendamento.NOTAS_FISCAIS %></td>
-                        <td align="center"><%= agendamento.VOLUMES%></td>
-                        <td align="center"><%= agendamento.FORNECEDOR_NOME %></td>
-                        <td align="center"><%= agendamento.TRANSPORTADORA_NOME %></td>
-                        <td align="center"><%= agendamento.TRANSPORTADORA_RESP_AGEND %></td>
-                        <td align="center"><%= agendamento.DIA_AGENDAMENTO %></td>
-                        <td align="center"><%= agendamento.HORARIO_INICIO %></td>
-                        <td align="center"><%= agendamento.HORARIO_FIM %></td>
-                        <td align="center"><%= agendamento.ID_AGENDAMENTO %></td>
-
-                    </tr>
-                    <% })%>
-                    </tr>
-
+                    <td align="center"><%= agendamento[0].ID_AGENDAMENTO %></td>
+                    <td align="center"><%= agendamento[0].NOTAS_FISCAIS %></td>
+                    <td align="center"><%= agendamento[0].VOLUMES%></td>
+                    <td align="center"><%= agendamento[0].FORNECEDOR_NOME %></td>
+                    <td align="center"><%= agendamento[0].TRANSPORTADORA_NOME %></td>
+                    <td align="center"><%= agendamento[0].TRANSPORTADORA_RESP_AGEND %></td>
+                    <td align="center"><%= agendamento[0].DIA_AGENDAMENTO %></td>
+                    <td align="center"><%= agendamento[0].HORARIO_INICIO %></td>
+                    <td align="center"><%= agendamento[0].HORARIO_FIM %></td>
+                    <td align="center"><%= agendamento[0].STATUS %></td>
                 </tbody>
             </table>
         </div>

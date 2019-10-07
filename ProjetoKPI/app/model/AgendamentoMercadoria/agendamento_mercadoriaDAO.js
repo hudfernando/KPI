@@ -17,17 +17,19 @@ function retorneOsValoresFormatadosParaOSQL(agendamento_mercadoria, codTrans) {
     let formato = 'DD/MM/YYYY';
     var valores;
     if (agendamento_mercadoria.OBSERVACAO != null) {
-        valores = 'INSERT INTO AGENDAMENTO (ID_TRANSPORTADORA, OBSERVACAO)';
+        valores = 'INSERT INTO AGENDAMENTO (ID_TRANSPORTADORA, STATUS, OBSERVACAO)';
         valores += 'VALUES (';
         valores += agora.format('YYYY-MM-DD') + ',';
         valores += codTrans + ',';
+        valores += "'" + 'AGUARDANDO' + "'" + ',';
         valores += "'" + agendamento_mercadoria.OBSERVACAO + "'" + ')';
     }
     else {
-        valores = 'INSERT INTO AGENDAMENTO (ID_TRANSPORTADORA)';
+        valores = 'INSERT INTO AGENDAMENTO (ID_TRANSPORTADORA, STATUS)';
         valores += 'VALUES (';
-       // valores += agora.format('YYYY-MM-DD') + ',';
-        valores += codTrans + ')';
+        valores += codTrans + ',';
+        valores += "'" + 'AGUARDANDO' + "'" + ')';
+        
     }
     return valores;
 }
@@ -83,6 +85,12 @@ agendamento_mercadoriaDAO.prototype.retorneoOUltimoAgendamentoSalvo = function (
 agendamento_mercadoriaDAO.prototype.retorneOsAgendamentosCriados = function()
 {
     let agendamentos = this._connection.query('SELECT * FROM RETORNE_OS_AGENDAMENTOS');
+    return agendamentos;
+}
+
+agendamento_mercadoriaDAO.prototype.retorneUltimoAgendamentoCriado = function()
+{
+    let agendamentos = this._connection.query('SELECT * FROM RETORNE_O_ULTIMO_AGENDAMENTO');
     return agendamentos;
 }
 

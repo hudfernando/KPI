@@ -32,7 +32,7 @@ module.exports.agendar = function (application, req, res) {
         dataFormatada += dataSemOtraco[1].substring(0, 2);
         return dataFormatada;
     }
-
+    
 
     // const transporter = nodemailer.createTransport({
     //     host: "webmail.goyazservice.com.br",
@@ -60,5 +60,5 @@ module.exports.agendar = function (application, req, res) {
     //     }
     // });
 
-    res.render("AgendamentoMercadoria/agendamento", { transportadora: infoTransportadora, fornecedor: infoFornecedor, agendamento: listaDeAgendamentos });
+    res.render("AgendamentoMercadoria/agendamento", { transportadora: infoTransportadora, fornecedor: infoFornecedor, agendamento: listaDeAgendamentos[listaDeAgendamentos.length - 1] });
 }
