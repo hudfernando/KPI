@@ -16,10 +16,10 @@ function insert(){
     return 'INSERT INTO EXPEDICAO (TOTAL_DE_VOLUMES_EXPEDIDOS, VALOR_TOTAL_DA_VENDA, FINAL_EXPEDICAO, DATA_INSERCAO)'; 
 }
 function retorneOsValoresFormatadosParaOSQL(expedicao){
-    const agora = moment();
+    const agora = moment().subtract(1, "hours");
     var anoMesDia = agora.format('YYYY-MM-DD');
-    var horaEMinuto = new moment().format("HH:mm:ss");
-
+    var horaEMinuto = agora.format("HH:mm:ss"); 
+;
     var valorSemOPonto = expedicao.VALOR_TOTAL_DA_VENDA.split('.');
     var partesDoValor;
     if (valorSemOPonto.length == 2) {

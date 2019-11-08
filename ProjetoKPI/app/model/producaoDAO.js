@@ -17,9 +17,9 @@ function insert(){
     return 'INSERT INTO PRODUCAO (TOTAL_DE_PEDIDOS, TOTAL_DE_LINHAS, MEDIA_LINHAS_POR_PEDIDO, TOTAL_DE_UNIDADES, FINAL_PRODUCAO, DATA_INSERCAO)'; 
 }
 function retorneOsValoresFormatadosParaOSQL(producao){
-    const agora = moment();
+    const agora = moment().subtract(1, "hours");;
     var anoMesDia = agora.format('YYYY-MM-DD');
-    var horaEMinuto = new moment().format("HH:mm:ss");
+    var horaEMinuto = agora.format("HH:mm:ss");
     var valores = 'VALUES (';
     valores += producao.TOTAL_DE_PEDIDOS + ',';
     valores += producao.TOTAL_DE_LINHAS  + ',';

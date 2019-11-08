@@ -3,7 +3,6 @@ const separador ='.....................................................\n';
 
 exports.recuperar = function (application, req, res) {
 
-
     var connection = application.config.dbConnection();
     var estoqueModel = new application.app.model.estoqueDAO(connection);
     var expedicaoModel = new application.app.model.expedicaoDAO(connection);
@@ -36,6 +35,8 @@ exports.recuperar = function (application, req, res) {
     mensagemDeEnvio += retorneInformacoesDoRMSFormatada(rms);
     mensagemDeEnvio += retorneInformacoesDoEstoqueFormatada(estoque, niveldeRupturaCalculado, data);
     mensagemDeEnvio += retorneInformacoesDaExpedicaoFormatada(expedicao);
+
+    console.log(mensagemDeEnvio);
 
     var bot = application.config.telegramBot();
     var botGerencia = new application.app.telegram.botGerencia(bot);
@@ -78,15 +79,25 @@ function retorneInformacoesDaExpedicaoFormatada(expedicao) {
 
 function retorneInformacoesDoEstoqueFormatada(estoque, valorDoNiveldeRuptura) {
     const agora = moment();
-    monName = new Array("jan", "fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez")
+    monName = new Array("Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez", "Jan")
     var graficoEstoque = "\u{1F4CA}";
     var mensagem = graficoEstoque + ' Estoque ' + graficoEstoque +'\n';
     mensagem += 'Prod Zerados => ' + formatarNumero(estoque[0].TOTAL_DE_PRODUTOS_ZERADOS) + '\n';
     mensagem += 'Nível de Rupturas => ' + valorDoNiveldeRuptura + '%' + '\n';
     var valor = formateNumeroParaMoeda(estoque[0].PERDAS_DO_MES);
-    mensagem += 'Venc ' + monName[(agora.month()) + 2] + ' => '  + valor + '\n';
+    mensagem += 'Venc ' + retorneOMes() + ' => '  + valor + '\n';
     mensagem += separador;
     return mensagem;
+}
+
+function retorneOMes(){
+    let mesEcolhido;
+    const agora = moment();
+    monName = new Array("Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez")
+    let r = agora.format('YYYY-MM-DD')
+    mesEcolhido = moment(r).add(2, "months").month();
+    return monName[mesEcolhido];
+      
 }
 
 function retorneInformacoesDoProducaoFormatada(producao) {
