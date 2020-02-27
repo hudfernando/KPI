@@ -24,13 +24,16 @@
         </div>
         <div id="conteudo-left" class="panel-body">
 
-            <table id="info" class="table table-bordered" width="50%" border="1px" cellpadding="5px" cellspacing="0">
+            <table id="info" class="table table-bordered" width="55%" border="1px" cellpadding="5px" cellspacing="0">
                 <thead>
                     <tr>
                         <th>Data</th>
                         <th>Total Produtos Zerados</th>
                         <th>Nivel de Rupturas</th>
-                        <th>Perdas Novembro</th>
+                        <th>Perdas Abril</th>
+                        <th>Perdas Maio</th>
+                        <th>Perdas Junho</th>
+
 
                     </tr>
                 </thead>
@@ -42,6 +45,8 @@
                         <td align="center"><%= estoque.TOTAL_DE_PRODUTOS_ZERADOS%></td>
                         <td align="center"><%= estoque.NIVEL_DE_RUPTURAS%></td>
                         <td align="center"><%= estoque.PERDAS_DO_MES %></td>
+                        <td align="center"><%= estoque.PERDAS_DO_MES_1 %></td>
+                        <td align="center"><%= estoque.PERDAS_DO_MES_2 %></td>
 
                     </tr>
                     <% })%>
@@ -52,21 +57,33 @@
         </div>
     </section>
 
-    <div id="conteudo-rigth" class="container">
+    <div class="container">
         <canvas id="myChart"></canvas>
+    </div>
+
+    <div class="container">
+        <canvas id="myChart1"></canvas>
     </div>
 
     <script>
         var inf = document.getElementById("info").innerText.split('\n');
+        var perdasMes = [];
+        var perdasMes_1 = [];
+        var perdasMes_2 = [];
         var listaDeData = [];
         var listaDeRupturas = [];
+        var perdas
         for (let index = 2; index < inf.length; index++) {
             let element = inf[index].split('\t');
             listaDeData.push(element[0]);
             listaDeRupturas.push(element[2]);
-            
-            
+            perdasMes.push(element[3]);
+            perdasMes_1.push(element[4]);
+            perdasMes_2.push(element[5]);
+
+
         }
+
         var ctx = document.getElementById("myChart").getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'line',
@@ -78,6 +95,53 @@
                         data: listaDeRupturas,
                         borderColor: 'rgba(75, 192, 192, 1)',
                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        //fill: false
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                        }
+                    }]
+                }
+            },
+        });
+
+        //grafico de perdas dos tres meses
+        var perdasDoMes = [];
+        function formateOValor(valor) {
+            var valorSemOCifrao = valor.split('R$ ');
+            var valorSemOPonto;
+
+            var partesDoValor = valorSemOCifrao[1].split('.');
+            valorSemOPonto = partesDoValor[0] += partesDoValor[1];
+
+            perdasDoMes.push(valorSemOPonto.replace(',', '.'));
+
+        }
+        formateOValor(perdasMes.pop())
+        formateOValor(perdasMes_1.pop())
+        formateOValor(perdasMes_2.pop())
+
+        console.log(perdasDoMes)
+        var ctxM = document.getElementById("myChart1").getContext('2d');
+        var myChart1 = new Chart(ctxM, {
+            type: 'bar',
+            data: {
+                labels: ["Abril", "Maio", "Junho"],
+                datasets: [
+                    {
+                        label: "Vencimentos",
+                        data: perdasDoMes,
+                        backgroundColor: [
+                            'rgba(255, 0, 0, 1)',
+                            'rgba(246, 255, 0, 1)',
+                            //'rgba(119, 255, 0, 1)'
+                            'rgba(255,165,0,1)'
+                        ],
                         //fill: false
                     }
                 ]

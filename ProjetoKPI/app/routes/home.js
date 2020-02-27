@@ -27,5 +27,9 @@ module.exports = function (application) {
         res.render('AgendamentoMercadoria/homeAgendamento');
     });
 
+    application.get('/pedido', function (req, res) {
+        res.render('ControleAtacado/home');
+    });
+
 }
 

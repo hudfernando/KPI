@@ -1,9 +1,12 @@
 var moment = require('moment');
+let fs = require('fs');
 function rmsDAO(connection) {
     this._connection = connection;
 }
 
-rmsDAO.prototype.rms_salvar = function (rms) {
+rmsDAO.prototype.rms_salvar = function (rms) { 
+    const agora = moment().subtract(1, "hours");
+    var anoMesDia = agora.format('YYYY-MM-DD');
     var sql = insert();
     var valores = '';
 
@@ -11,6 +14,10 @@ rmsDAO.prototype.rms_salvar = function (rms) {
     sql += valores;
 
     this._connection.query(sql);
+    fs.writeFile('C:/WorkHudson/KPI/ProjetoKPI/app/areas/rms_' + anoMesDia.toString() + '.txt', 'rms', { enconding: 'utf-8', flag: 'a' }, function (err) {
+        if (err) throw err;
+        console.log('Arquivo salvo!');
+    });
 }
 rmsDAO.prototype.recuperar = function (data) {
     var select = 'SELECT VALOR_RECEBIDO ,NOTAS_EFETIVADAS, RESSARCIMENTO_INDUSTRIA FROM RMS WHERE DATA_INSERCAO =';

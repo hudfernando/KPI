@@ -1,5 +1,5 @@
 var moment = require('moment');
-
+let fs = require('fs');
 function informacoesMensaisDAO(connection) {
     this._connection = connection;
 }
@@ -7,6 +7,9 @@ function informacoesMensaisDAO(connection) {
 
 
 informacoesMensaisDAO.prototype.informacoes_mensais_salvar = function (informacoesMensais) {
+    const agora = moment();
+    let anoMes = agora.format('YYYY-MM');
+
     var sql = insert();
     var valores =''; 
     
@@ -14,6 +17,10 @@ informacoesMensaisDAO.prototype.informacoes_mensais_salvar = function (informaco
     sql += valores;
     try{
         this._connection.query(sql);
+        fs.writeFile('C:/WorkHudson/KPI/ProjetoKPI/app/areas/informacoesMensais_'  + anoMes.toString() + '.txt', 'informacoesMensais' , { enconding: 'utf-8', flag: 'a' }, function (err) {
+            if (err) throw err;
+            console.log('Arquivo salvo!');
+        });
     }catch{
         return;
     }

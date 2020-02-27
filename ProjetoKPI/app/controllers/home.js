@@ -1,56 +1,78 @@
-var moment = require('moment');
+let moment = require('moment');
+let fs = require('fs');
 module.exports.index = function (application, req, res) {
 
-console.log('1');
-    var connection = application.config.dbConnection();
+    let informacoesMensais;
+    let producao;
+    let estoque;
+    let rms;
+    let expedicao;
+    const now = moment().subtract(1, "hours");
+    let anoMesDia = now.format('YYYY-MM-DD');
+    let anoMes = now.format('YYYY-MM');
     
     
-    
-    
-    
+    try{
+        informacoesMensais = fs.readFileSync('C:/WorkHudson/KPI/ProjetoKPI/app/areas/informacoesMensais_' + anoMes.toString()  +'.txt', 'utf8');
+    }
+    catch{
 
-    const now = moment();
-    var data = now.format('YYYY-MM-DD');
+    }
+    try {
+        producao = fs.readFileSync('C:/WorkHudson/KPI/ProjetoKPI/app/areas/producao_' + anoMesDia.toString()  +'.txt', 'utf8');
+    } catch (error) {
+        
+    }
+    try {
+        estoque = fs.readFileSync('C:/WorkHudson/KPI/ProjetoKPI/app/areas/estoque_' + anoMesDia.toString()  +'.txt', 'utf8');
+    } catch (error) {
+        
+    }
+    try {
+        rms = fs.readFileSync('C:/WorkHudson/KPI/ProjetoKPI/app/areas/rms_' + anoMesDia.toString()  + '.txt', 'utf8');
+    } catch (error) {
+        
+    }
+    try {
+        expedicao = fs.readFileSync('C:/WorkHudson/KPI/ProjetoKPI/app/areas/expedicao_' + anoMesDia.toString() +'.txt', 'utf8');
+    } catch (error) {
+        
+    }
+    //let connection = application.config.dbConnection();
 
-    var areasJaInseridasInformacoes = [];
-    console.log('2');
-    
-    var informacoesMensaisModel = new application.app.model.informacoesMensaisDAO(connection);
-    var informacoesMensais = informacoesMensaisModel.recuperar();
-    console.log('3');
-    if (informacoesMensais.length > 0){
+
+    let areasJaInseridasInformacoes = [];
+
+    //let informacoesMensaisModel = new application.app.model.informacoesMensaisDAO(connection);
+    //let informacoesMensais = informacoesMensaisModel.recuperar();
+    if (informacoesMensais != null && informacoesMensais !== undefined) {
         areasJaInseridasInformacoes.push(0);
     }
 
-    var producaoModel = new application.app.model.producaoDAO(connection);
-    var producao = producaoModel.recuperar(data);
-    console.log('4');
-    if (producao.length > 0){
+    //let producaoModel = new application.app.model.producaoDAO(connection);
+    //let producao = producaoModel.recuperar(data);
+    if (producao != null && producao !== undefined) {
         areasJaInseridasInformacoes.push(1);
     }
 
-    var estoqueModel = new application.app.model.estoqueDAO(connection);
-    var estoque = estoqueModel.recuperar(data);
-    console.log('5');
-    if (estoque.length > 0){
+    //let estoqueModel = new application.app.model.estoqueDAO(connection);
+    //let estoque = estoqueModel.recuperar(data);
+    if (estoque != null && estoque !== undefined) {
         areasJaInseridasInformacoes.push(2);
     }
-    
-    var rmsModel = new application.app.model.rmsDAO(connection);
-    var rms = rmsModel.recuperar(data);
-    console.log('6');
-    if (rms.length > 0){
+
+    //let rmsModel = new application.app.model.rmsDAO(connection);
+    //let rms = rmsModel.recuperar(data);
+    if (rms != null && rms !== undefined) {
         areasJaInseridasInformacoes.push(3);
     }
-    
-    var expedicaoModel = new application.app.model.expedicaoDAO(connection);
-    var expedicao = expedicaoModel.recuperar(data);
-    console.log('7');
-    if (expedicao.length > 0){
-        areasJaInseridasInformacoes.push(4); 
+
+    //let expedicaoModel = new application.app.model.expedicaoDAO(connection);
+    //let expedicao = expedicaoModel.recuperar(data);
+    if (expedicao != null && expedicao !== undefined) {
+        areasJaInseridasInformacoes.push(4);
     }
 
-    console.log('8');
-    res.render("home", {areas : areasJaInseridasInformacoes});
-    
+    res.render("home", { areas: areasJaInseridasInformacoes });
+
 }

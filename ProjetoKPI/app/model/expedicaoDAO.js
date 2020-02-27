@@ -1,8 +1,12 @@
 var moment = require('moment');
+let fs = require('fs');
 function expedicaoDAO(connection) {
     this._connection = connection;
 }
 expedicaoDAO.prototype.expedicao_salvar = function (expedicao) {
+    const agora = moment().subtract(1, "hours");
+    var anoMesDia = agora.format('YYYY-MM-DD');
+
     var sql = insert();
     var valores =''; 
     
@@ -10,16 +14,19 @@ expedicaoDAO.prototype.expedicao_salvar = function (expedicao) {
     sql += valores;
 
     this._connection.query(sql);
+    fs.writeFile('C:/WorkHudson/KPI/ProjetoKPI/app/areas/expedicao_'  + anoMesDia.toString() + '.txt', 'expedicao', { enconding: 'utf-8', flag: 'a' }, function (err) {
+        if (err) throw err;
+    });
 }
 
 function insert(){
     return 'INSERT INTO EXPEDICAO (TOTAL_DE_VOLUMES_EXPEDIDOS, VALOR_TOTAL_DA_VENDA, FINAL_EXPEDICAO, DATA_INSERCAO)'; 
 }
 function retorneOsValoresFormatadosParaOSQL(expedicao){
-    const agora = moment().subtract(1, "hours");
+    const agora = moment();
     var anoMesDia = agora.format('YYYY-MM-DD');
     var horaEMinuto = agora.format("HH:mm:ss"); 
-;
+    
     var valorSemOPonto = expedicao.VALOR_TOTAL_DA_VENDA.split('.');
     var partesDoValor;
     if (valorSemOPonto.length == 2) {
